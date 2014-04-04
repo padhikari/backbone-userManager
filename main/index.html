@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset ="utf-8">
+	<title>Backbone - User Manager</title>
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+</head>
+<body>
+
+
+<div class ="container">
+	<h1>User Manager</h1>
+	<hr  />
+	<div class ="main"></div>
+
+</div>
+
+<script src="./js/jquery-1.11.0.js"></script>
+<script src="./js/underscore.js"></script>
+<script src="./js/backbone.js"></script>
+
+
+<script>
+
+var UserList = Backbone.View.extend({
+	el:'.main',
+	render: function(){
+		this.$el.html('Content should show here');
+	}
+});
+
+var Router = Backbone.Router.extend({
+	routes: {
+		'':'home'
+	}
+
+});
+
+var userList = new UserList();
+
+var  router = new Router();
+router.on('route:home', function(){
+	userList.render();
+});
+
+
+
+Backbone.history.start();
+
+
+</script>
+
+
+</body>
+</html>
