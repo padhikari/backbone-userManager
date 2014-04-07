@@ -1,6 +1,6 @@
 var app = app || {};
 
-app.Book = Backbone.Model.extend({
+app User = Backbone.Model.extend({
 	defaults: {
 		firstName:'unknown',
 		lastName:'Unknown',
