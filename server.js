@@ -8,8 +8,18 @@ mongoose = require( 'mongoose' ); //MongoDB integration
 var app =express();
 
 //Connect to database
-// mongoose.connect('mongodb://localhost/user-manager');
+mongoose.connect('mongodb://localhost/user-manager');
 
+//define schema
+var Users = new mongoose.Schema({
+	firstName: String,
+	lastName: String,
+	age: Number
+});
+
+
+//Models
+var UserModel = mongoose.model( 'Users', Users );
 
 
  // Configure server
@@ -34,6 +44,32 @@ app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
 app.get( '/api', function( request, response ) {
 response.send( 'UserManager API is running' );
 });
+
+//Get a list of all users
+app.get( '/users', function( request, response ) {
+	return UserModel.find( function( err, users ) {
+		if( !err ) {
+			return response.send( users );
+		}else {
+			return console.log( err );
+		}
+	});
+});
+
+
+//Insert a new book
+app.post( '/users', function( request, response ) { var user = new UserModel({
+            firstName: request.body.firstName,
+            lastName: request.body.lastName,
+            age: request.body.age
+});
+user.save( function( err ) {
+if( !err ) {
+return console.log( 'created' );
+} else {
+return console.log( err );
+} });
+return response.send(user); });
 
 
 //start server
