@@ -41,7 +41,7 @@ app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 // Routes
-app.get( '/api', function( request, response ) {
+app.get( '/', function( request, response ) {
 response.send( 'UserManager API is running' );
 });
 
@@ -57,7 +57,7 @@ app.get( '/users', function( request, response ) {
 });
 
 
-//Insert a new book
+//Insert a new user
 app.post( '/users', function( request, response ) { var user = new UserModel({
             firstName: request.body.firstName,
             lastName: request.body.lastName,
